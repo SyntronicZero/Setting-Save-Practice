@@ -15,8 +15,8 @@ func _ready() -> void:
 		config.set_value("keybinding", "Shoot", "mouse_1")
 		
 		config.set_value("screen", "Fullscreen", false)
-		config.set_value("screen", "Width", "960")
-		config.set_value("screen", "Height", "540")
+		config.set_value("screen", "Width", 1920)
+		config.set_value("screen", "Height", 1080)
 		config.save(SETTINGS_SAVE_PATH)
 	else: 
 		config.load(SETTINGS_SAVE_PATH)
