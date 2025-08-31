@@ -5,7 +5,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var screen_settings = ConfigFileManager.load_screen_settings()
+	var screen_settings = ConfigFileManager.load_screen_settings() #loads the screen settings into a variable, which allows read access to the properties in it
 	fullscreen_button.button_pressed = screen_settings.Fullscreen
 	
 	

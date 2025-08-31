@@ -5,7 +5,7 @@ const SETTINGS_SAVE_PATH = "user://settings.ini" #this is where we save the file
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if !FileAccess.file_exists(SETTINGS_SAVE_PATH):
+	if !FileAccess.file_exists(SETTINGS_SAVE_PATH): #if the config file doesnt exist, create a new one and set the following default values
 		#set_value(section, key, value) section(where this value is), key(name of the value), value(whatever we want to save)
 		config.set_value("keybinding", "Up", "W")
 		config.set_value("keybinding", "Down", "S")
@@ -15,19 +15,20 @@ func _ready() -> void:
 		config.set_value("keybinding", "Shoot", "mouse_1")
 		
 		config.set_value("screen", "Fullscreen", false)
-		config.set_value("screen", "Width", 1920)
-		config.set_value("screen", "Height", 1080)
+		config.set_value("screen", "Width", DisplayServer.screen_get_size().x) #gets the current screen size and auto sets the ingame resolution to it
+		config.set_value("screen", "Height", DisplayServer.screen_get_size().y)
 		config.save(SETTINGS_SAVE_PATH)
+		
 	else: 
-		config.load(SETTINGS_SAVE_PATH)
+		config.load(SETTINGS_SAVE_PATH) #loads the config file if it exists
 	print(OS.get_user_data_dir())
 	pass # Replace with function body.
 
-func save_screen_settings(key: String, value):
+func save_screen_settings(key: String, value): #call this func when setting screen settings. "key" is the setting we are updating, "value" is what we are changing it to
 	config.set_value("screen", key, value)
 	config.save(SETTINGS_SAVE_PATH)
 
-func load_screen_settings():
+func load_screen_settings(): #loads screen settings
 	var screen_settings: Dictionary
 	for key in config.get_section_keys("screen"):
 		screen_settings[key] = config.get_value("screen", key)
