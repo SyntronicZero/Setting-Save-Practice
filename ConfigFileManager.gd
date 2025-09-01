@@ -14,9 +14,11 @@ func _ready() -> void:
 		config.set_value("keybinding", "Jump", "Space")
 		config.set_value("keybinding", "Shoot", "mouse_1")
 		
-		config.set_value("screen", "Fullscreen", false)
+		#config.set_value("screen", "Fullscreen", false)
 		config.set_value("screen", "Width", DisplayServer.screen_get_size().x) #gets the current screen size and auto sets the ingame resolution to it
 		config.set_value("screen", "Height", DisplayServer.screen_get_size().y)
+		config.set_value("screen", "Max_FPS", 0)
+		config.set_value("screen", "Vsync", false)
 		config.save(SETTINGS_SAVE_PATH)
 		
 	else: 

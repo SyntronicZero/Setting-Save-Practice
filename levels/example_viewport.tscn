@@ -38,15 +38,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.259773, 2.06235)
 
 [node name="Settings" parent="." instance=ExtResource("1_3whew")]
 
-[node name="Label" type="Label" parent="."]
-anchors_preset = 13
+[node name="Label" type="Label" parent="Settings"]
+anchors_preset = -1
 anchor_left = 0.5
+anchor_top = 0.511
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.511
 offset_left = -960.0
-offset_top = 529.0
+offset_top = -22.8801
 offset_right = -852.0
-offset_bottom = -528.0
+offset_bottom = 0.119934
 grow_horizontal = 2
 grow_vertical = 2
 text = "ultrawide test"
