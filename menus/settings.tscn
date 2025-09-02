@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqnhk1l0pbdht"]
+[gd_scene load_steps=7 format=3 uid="uid://cqnhk1l0pbdht"]
 
 [ext_resource type="Script" uid="uid://cuk1knkdwbg16" path="res://menus/settings.gd" id="1_urrvo"]
 [ext_resource type="Script" uid="uid://bkev3y82nlwue" path="res://menus/resolution_dropdown.gd" id="2_kot5a"]
 [ext_resource type="Script" uid="uid://dmop6wxwou5f6" path="res://menus/max_fps_setting.gd" id="3_0uirt"]
+[ext_resource type="Script" uid="uid://5wlxubnw2pt8" path="res://menus/mode_setting.gd" id="3_d8eyj"]
+[ext_resource type="PackedScene" uid="uid://bforowjk5phpy" path="res://menus/components/h_select.tscn" id="3_hjugb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uirt"]
+bg_color = Color(0.103744, 0.103744, 0.103743, 1)
 
 [node name="Settings" type="CanvasLayer"]
 script = ExtResource("1_urrvo")
@@ -13,151 +18,171 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background"]
+[node name="TabContainer" type="TabContainer" parent="Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+tab_alignment = 1
+current_tab = 0
+tab_focus_mode = 0
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Background/HBoxContainer"]
+[node name="Settings" type="Control" parent="Background/TabContainer"]
 layout_mode = 2
+mouse_filter = 2
+metadata/_tab_index = 0
 
-[node name="FullscreenLabel" type="Label" parent="Background/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Fullscreen"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/HBoxContainer"]
-layout_mode = 2
-
-[node name="FullscreenButton" type="CheckBox" parent="Background/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Fullscreen"
-
-[node name="HSlider" type="HSlider" parent="Background/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="OptionsList" type="VBoxContainer" parent="Background"]
+[node name="OptionsList" type="VBoxContainer" parent="Background/TabContainer/Settings"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -285.0
-offset_right = 285.0
+offset_left = -315.0
+offset_right = 315.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScreenSettings" type="VBoxContainer" parent="Background/OptionsList"]
+[node name="ScreenSettings" type="VBoxContainer" parent="Background/TabContainer/Settings/OptionsList"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ScreenSettingsLabel" type="Label" parent="Background/OptionsList/ScreenSettings"]
+[node name="ScreenSettingsLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings"]
 layout_mode = 2
 text = "Screen Settings"
 horizontal_alignment = 1
 
-[node name="ResolutionSetting" type="HBoxContainer" parent="Background/OptionsList/ScreenSettings"]
+[node name="ResolutionSetting" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings"]
 layout_mode = 2
 alignment = 1
 
-[node name="ResolutionLabel" type="Label" parent="Background/OptionsList/ScreenSettings/ResolutionSetting"]
+[node name="ResolutionLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/ResolutionSetting"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Resolution"
 vertical_alignment = 1
 
-[node name="ResolutionDropdown" type="OptionButton" parent="Background/OptionsList/ScreenSettings/ResolutionSetting"]
+[node name="ResolutionDropdown" type="OptionButton" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/ResolutionSetting"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 fit_to_longest_item = false
 script = ExtResource("2_kot5a")
 
-[node name="ModeSetting" type="HBoxContainer" parent="Background/OptionsList/ScreenSettings"]
+[node name="ModeSetting" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings"]
 layout_mode = 2
 alignment = 1
+script = ExtResource("3_d8eyj")
 
-[node name="ModeLabel" type="Label" parent="Background/OptionsList/ScreenSettings/ModeSetting"]
+[node name="ModeLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/ModeSetting"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Screen Mode"
 vertical_alignment = 1
 
-[node name="ModeDropdown" type="OptionButton" parent="Background/OptionsList/ScreenSettings/ModeSetting"]
-custom_minimum_size = Vector2(75, 0)
+[node name="HSelect2" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/ModeSetting" instance=ExtResource("3_hjugb")]
 layout_mode = 2
-size_flags_horizontal = 2
-fit_to_longest_item = false
 
-[node name="MaxFPSSetting" type="HBoxContainer" parent="Background/OptionsList/ScreenSettings"]
+[node name="MaxFPSSetting" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings"]
 layout_mode = 2
 script = ExtResource("3_0uirt")
 
-[node name="MaxFPSLabel" type="Label" parent="Background/OptionsList/ScreenSettings/MaxFPSSetting"]
+[node name="MaxFPSLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Max FPS"
 
-[node name="HSelect" type="HBoxContainer" parent="Background/OptionsList/ScreenSettings/MaxFPSSetting"]
+[node name="HSelect" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LeftButton" type="Button" parent="Background/OptionsList/ScreenSettings/MaxFPSSetting/HSelect"]
+[node name="LeftButton" type="Button" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting/HSelect"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "<"
 
-[node name="SelectedFPS" type="Label" parent="Background/OptionsList/ScreenSettings/MaxFPSSetting/HSelect"]
+[node name="SelectedFPS" type="Label" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting/HSelect"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 6.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_0uirt")
 text = "FPS HERE"
 horizontal_alignment = 1
 
-[node name="RightButton" type="Button" parent="Background/OptionsList/ScreenSettings/MaxFPSSetting/HSelect"]
+[node name="RightButton" type="Button" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting/HSelect"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = ">"
 
-[node name="VolumeSettings" type="VBoxContainer" parent="Background/OptionsList"]
+[node name="VolumeSettings" type="VBoxContainer" parent="Background/TabContainer/Settings/OptionsList"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="VolumeLabel" type="Label" parent="Background/OptionsList/VolumeSettings"]
+[node name="VolumeLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings"]
 layout_mode = 2
 text = "Volume"
 horizontal_alignment = 1
 
-[node name="MasterVolumeSetting" type="HBoxContainer" parent="Background/OptionsList/VolumeSettings"]
+[node name="MasterVolumeSetting" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings"]
 layout_mode = 2
 
-[node name="MasterVolLabel" type="Label" parent="Background/OptionsList/VolumeSettings/MasterVolumeSetting"]
+[node name="MasterVolLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings/MasterVolumeSetting"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Master Volume"
 
-[node name="MasterVolSlider" type="HSlider" parent="Background/OptionsList/VolumeSettings/MasterVolumeSetting"]
+[node name="MasterVolSlider" type="HSlider" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings/MasterVolumeSetting"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="MusicVolumeSetting" type="HBoxContainer" parent="Background/OptionsList/VolumeSettings"]
+[node name="MusicVolumeSetting" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings"]
 layout_mode = 2
 
-[node name="MusicVolLabel" type="Label" parent="Background/OptionsList/VolumeSettings/MusicVolumeSetting"]
+[node name="MusicVolLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings/MusicVolumeSetting"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Music Volume"
 
-[node name="MusicVolSlider" type="HSlider" parent="Background/OptionsList/VolumeSettings/MusicVolumeSetting"]
+[node name="MusicVolSlider" type="HSlider" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings/MusicVolumeSetting"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[connection signal="toggled" from="Background/HBoxContainer/VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
-[connection signal="item_selected" from="Background/OptionsList/ScreenSettings/ResolutionSetting/ResolutionDropdown" to="Background/OptionsList/ScreenSettings/ResolutionSetting/ResolutionDropdown" method="_on_item_selected"]
-[connection signal="pressed" from="Background/OptionsList/ScreenSettings/MaxFPSSetting/HSelect/LeftButton" to="Background/OptionsList/ScreenSettings/MaxFPSSetting" method="_on_left_button_pressed"]
-[connection signal="pressed" from="Background/OptionsList/ScreenSettings/MaxFPSSetting/HSelect/RightButton" to="Background/OptionsList/ScreenSettings/MaxFPSSetting" method="_on_right_button_pressed"]
+[node name="ApplySettings" type="Button" parent="Background/TabContainer/Settings/OptionsList"]
+layout_mode = 2
+text = "Apply"
+
+[node name="Keybinds" type="Control" parent="Background/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="KeybindTabs" type="TabContainer" parent="Background/TabContainer/Keybinds"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+current_tab = 1
+
+[node name="Keyboard" type="Control" parent="Background/TabContainer/Keybinds/KeybindTabs"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Controller" type="Control" parent="Background/TabContainer/Keybinds/KeybindTabs"]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[connection signal="item_selected" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/ResolutionSetting/ResolutionDropdown" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/ResolutionSetting/ResolutionDropdown" method="_on_item_selected"]
+[connection signal="update_option_selected" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/ModeSetting/HSelect2" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/ModeSetting" method="_on_h_select_2_update_option_selected"]
+[connection signal="pressed" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting/HSelect/LeftButton" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting" method="_on_left_button_pressed"]
+[connection signal="pressed" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting/HSelect/RightButton" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting" method="_on_right_button_pressed"]
+[connection signal="pressed" from="Background/TabContainer/Settings/OptionsList/ApplySettings" to="." method="_on_apply_settings_pressed"]

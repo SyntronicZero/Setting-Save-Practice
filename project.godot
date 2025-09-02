@@ -15,9 +15,14 @@ run/main_scene="uid://cf3w8243h2vy0"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://buf4e0gc2ibi4"
+
 [autoload]
 
-ConfigFileManager="*res://ConfigFileManager.gd"
+ConfigFileManager="*res://globals/ConfigFileManager.gd"
+ConfigsChanged="*res://globals/ConfigsChanged.gd"
 
 [display]
 

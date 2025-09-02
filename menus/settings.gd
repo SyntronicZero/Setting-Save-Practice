@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-@onready var fullscreen_button: CheckBox = $Background/HBoxContainer/VBoxContainer/FullscreenButton
-
 var screen_settings = ConfigFileManager.load_screen_settings() #loads the screen settings into a variable, which allows read access to the properties in it
+
+signal apply_settings()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,7 +12,11 @@ func _ready() -> void:
 	
 
 
-
-func _on_fullscreen_button_toggled(toggled_on: bool) -> void:
-	ConfigFileManager.save_screen_settings("Fullscreen", toggled_on)
+func _on_apply_settings_pressed() -> void:
+	print(ConfigsChanged.changed_screen_settings)
+	if ConfigsChanged.changed_screen_settings.size() > 0:
+		for key in ConfigsChanged.changed_screen_settings:
+			ConfigFileManager.save_screen_settings(key, ConfigsChanged.changed_screen_settings[key])
+			print(key)
+	apply_settings.emit()
 	pass # Replace with function body.
