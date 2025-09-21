@@ -1,14 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://cqnhk1l0pbdht"]
 
-[ext_resource type="Script" uid="uid://cuk1knkdwbg16" path="res://menus/settings.gd" id="1_urrvo"]
-[ext_resource type="Script" uid="uid://bkev3y82nlwue" path="res://menus/resolution_dropdown.gd" id="2_kot5a"]
+[ext_resource type="Script" uid="uid://bkev3y82nlwue" path="res://menus/resolution_setting.gd" id="2_kot5a"]
 [ext_resource type="Script" uid="uid://dmop6wxwou5f6" path="res://menus/max_fps_setting.gd" id="3_0uirt"]
 [ext_resource type="Script" uid="uid://5wlxubnw2pt8" path="res://menus/mode_setting.gd" id="3_d8eyj"]
 [ext_resource type="PackedScene" uid="uid://bforowjk5phpy" path="res://menus/components/h_select.tscn" id="3_hjugb"]
 [ext_resource type="Script" uid="uid://46wq0kr33hyf" path="res://menus/vsync_setting.gd" id="6_cyvjr"]
+[ext_resource type="Script" uid="uid://benudy6f4s8jq" path="res://menus/screen_settings_buttons.gd" id="7_8754g"]
 
 [node name="Settings" type="CanvasLayer"]
-script = ExtResource("1_urrvo")
 
 [node name="Background" type="Panel" parent="."]
 anchors_preset = 15
@@ -16,25 +15,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="TabContainer" type="TabContainer" parent="Background"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SettingsTabs" type="TabContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 tab_alignment = 1
 current_tab = 0
 tab_focus_mode = 0
 
-[node name="Settings" type="Control" parent="Background/TabContainer"]
+[node name="Screen" type="Control" parent="Background/VBoxContainer/SettingsTabs"]
 layout_mode = 2
-mouse_filter = 2
 metadata/_tab_index = 0
 
-[node name="OptionsList" type="VBoxContainer" parent="Background/TabContainer/Settings"]
+[node name="OptionsList" type="VBoxContainer" parent="Background/VBoxContainer/SettingsTabs/Screen"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -45,116 +50,146 @@ offset_right = 315.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScreenSettings" type="VBoxContainer" parent="Background/TabContainer/Settings/OptionsList"]
+[node name="ScreenSettings" type="VBoxContainer" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ScreenSettingsLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings"]
+[node name="ScreenSettingsLabel" type="Label" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings"]
 layout_mode = 2
 text = "Screen Settings"
 horizontal_alignment = 1
 
-[node name="ResolutionSetting" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings"]
+[node name="ResolutionSetting" type="HBoxContainer" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings"]
 layout_mode = 2
 alignment = 1
+script = ExtResource("2_kot5a")
 
-[node name="ResolutionLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/ResolutionSetting"]
+[node name="ResolutionLabel" type="Label" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/ResolutionSetting"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Resolution"
 vertical_alignment = 1
 
-[node name="ResolutionDropdown" type="OptionButton" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/ResolutionSetting"]
+[node name="ResolutionDropdown" type="OptionButton" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/ResolutionSetting"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 fit_to_longest_item = false
-script = ExtResource("2_kot5a")
 
-[node name="ModeSetting" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings"]
+[node name="ModeSetting" type="HBoxContainer" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings"]
 layout_mode = 2
 alignment = 1
 script = ExtResource("3_d8eyj")
 
-[node name="ModeLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/ModeSetting"]
+[node name="ModeLabel" type="Label" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/ModeSetting"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Screen Mode"
 vertical_alignment = 1
 
-[node name="HSelect2" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/ModeSetting" instance=ExtResource("3_hjugb")]
+[node name="HSelect2" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/ModeSetting" instance=ExtResource("3_hjugb")]
 layout_mode = 2
 
-[node name="MaxFPSSetting" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings"]
+[node name="MaxFPSSetting" type="HBoxContainer" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings"]
 layout_mode = 2
 script = ExtResource("3_0uirt")
 
-[node name="MaxFPSLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting"]
+[node name="MaxFPSLabel" type="Label" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/MaxFPSSetting"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Max FPS"
 
-[node name="HSelect" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting" instance=ExtResource("3_hjugb")]
+[node name="HSelect" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/MaxFPSSetting" instance=ExtResource("3_hjugb")]
 layout_mode = 2
 
-[node name="VsyncSetting" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings"]
+[node name="VsyncSetting" type="HBoxContainer" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings"]
 layout_mode = 2
 script = ExtResource("6_cyvjr")
 
-[node name="VsyncLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/VsyncSetting"]
+[node name="VsyncLabel" type="Label" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/VsyncSetting"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "V-Sync"
 
-[node name="HSelect" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/VsyncSetting" instance=ExtResource("3_hjugb")]
+[node name="HSelect" parent="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/VsyncSetting" instance=ExtResource("3_hjugb")]
 layout_mode = 2
 max_options = 1
 
-[node name="VolumeSettings" type="VBoxContainer" parent="Background/TabContainer/Settings/OptionsList"]
+[node name="Sound" type="Control" parent="Background/VBoxContainer/SettingsTabs"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+metadata/_tab_index = 1
+
+[node name="OptionsList" type="VBoxContainer" parent="Background/VBoxContainer/SettingsTabs/Sound"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -315.0
+offset_right = 315.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SoundSettings" type="VBoxContainer" parent="Background/VBoxContainer/SettingsTabs/Sound/OptionsList"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="VolumeLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings"]
+[node name="VolumeLabel" type="Label" parent="Background/VBoxContainer/SettingsTabs/Sound/OptionsList/SoundSettings"]
 layout_mode = 2
-text = "Volume"
+text = "Sound Settings"
 horizontal_alignment = 1
 
-[node name="MasterVolumeSetting" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings"]
+[node name="MasterVolumeSetting" type="HBoxContainer" parent="Background/VBoxContainer/SettingsTabs/Sound/OptionsList/SoundSettings"]
 layout_mode = 2
 
-[node name="MasterVolLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings/MasterVolumeSetting"]
+[node name="MasterVolLabel" type="Label" parent="Background/VBoxContainer/SettingsTabs/Sound/OptionsList/SoundSettings/MasterVolumeSetting"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Master Volume"
 
-[node name="MasterVolSlider" type="HSlider" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings/MasterVolumeSetting"]
+[node name="MasterVolSlider" type="HSlider" parent="Background/VBoxContainer/SettingsTabs/Sound/OptionsList/SoundSettings/MasterVolumeSetting"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="MusicVolumeSetting" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings"]
+[node name="MusicVolumeSetting" type="HBoxContainer" parent="Background/VBoxContainer/SettingsTabs/Sound/OptionsList/SoundSettings"]
 layout_mode = 2
 
-[node name="MusicVolLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings/MusicVolumeSetting"]
+[node name="MusicVolLabel" type="Label" parent="Background/VBoxContainer/SettingsTabs/Sound/OptionsList/SoundSettings/MusicVolumeSetting"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Music Volume"
 
-[node name="MusicVolSlider" type="HSlider" parent="Background/TabContainer/Settings/OptionsList/VolumeSettings/MusicVolumeSetting"]
+[node name="MusicVolSlider" type="HSlider" parent="Background/VBoxContainer/SettingsTabs/Sound/OptionsList/SoundSettings/MusicVolumeSetting"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="ApplySettings" type="Button" parent="Background/TabContainer/Settings/OptionsList"]
-layout_mode = 2
-text = "Apply"
-
-[node name="Keybinds" type="Control" parent="Background/TabContainer"]
+[node name="placeholder" type="Control" parent="Background/VBoxContainer/SettingsTabs"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 1
+mouse_filter = 2
+metadata/_tab_index = 2
 
-[node name="KeybindTabs" type="TabContainer" parent="Background/TabContainer/Keybinds"]
+[node name="OptionsList" type="VBoxContainer" parent="Background/VBoxContainer/SettingsTabs/placeholder"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -315.0
+offset_right = 315.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Keybinds" type="Control" parent="Background/VBoxContainer/SettingsTabs"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="KeybindTabs" type="TabContainer" parent="Background/VBoxContainer/SettingsTabs/Keybinds"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -164,17 +199,36 @@ grow_vertical = 2
 tab_alignment = 1
 current_tab = 1
 
-[node name="Keyboard" type="Control" parent="Background/TabContainer/Keybinds/KeybindTabs"]
+[node name="Keyboard" type="Control" parent="Background/VBoxContainer/SettingsTabs/Keybinds/KeybindTabs"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Controller" type="Control" parent="Background/TabContainer/Keybinds/KeybindTabs"]
+[node name="Controller" type="Control" parent="Background/VBoxContainer/SettingsTabs/Keybinds/KeybindTabs"]
 layout_mode = 2
 metadata/_tab_index = 1
 
-[connection signal="item_selected" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/ResolutionSetting/ResolutionDropdown" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/ResolutionSetting/ResolutionDropdown" method="_on_item_selected"]
-[connection signal="update_option_selected" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/ModeSetting/HSelect2" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/ModeSetting" method="_on_h_select_2_update_option_selected"]
-[connection signal="update_option_selected" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting/HSelect" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting" method="_on_h_select_update_option_selected"]
-[connection signal="update_option_selected" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/VsyncSetting/HSelect" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/VsyncSetting" method="_on_h_select_update_option_selected"]
-[connection signal="pressed" from="Background/TabContainer/Settings/OptionsList/ApplySettings" to="." method="_on_apply_settings_pressed"]
+[node name="ApplySettings" type="HBoxContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+script = ExtResource("7_8754g")
+
+[node name="ApplyButton" type="Button" parent="Background/VBoxContainer/ApplySettings"]
+layout_mode = 2
+text = "Apply"
+
+[node name="RevertButton" type="Button" parent="Background/VBoxContainer/ApplySettings"]
+layout_mode = 2
+text = "Revert"
+
+[node name="DefaultsButton" type="Button" parent="Background/VBoxContainer/ApplySettings"]
+layout_mode = 2
+text = "Defaults"
+
+[connection signal="item_selected" from="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/ResolutionSetting/ResolutionDropdown" to="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/ResolutionSetting" method="_on_resolution_dropdown_item_selected"]
+[connection signal="update_option_selected" from="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/ModeSetting/HSelect2" to="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/ModeSetting" method="_on_h_select_2_update_option_selected"]
+[connection signal="update_option_selected" from="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/MaxFPSSetting/HSelect" to="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/MaxFPSSetting" method="_on_h_select_update_option_selected"]
+[connection signal="update_option_selected" from="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/VsyncSetting/HSelect" to="Background/VBoxContainer/SettingsTabs/Screen/OptionsList/ScreenSettings/VsyncSetting" method="_on_h_select_update_option_selected"]
+[connection signal="pressed" from="Background/VBoxContainer/ApplySettings/ApplyButton" to="Background/VBoxContainer/ApplySettings" method="_on_apply_button_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/ApplySettings/RevertButton" to="Background/VBoxContainer/ApplySettings" method="_on_revert_button_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/ApplySettings/DefaultsButton" to="Background/VBoxContainer/ApplySettings" method="_on_defaults_button_pressed"]

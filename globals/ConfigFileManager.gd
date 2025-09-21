@@ -1,6 +1,7 @@
 extends Node
 #ATTENTION: this is a global settings_config file. It must be autoloaded
 var settings_config = ConfigFile.new() #this is our config file vaiable
+var default_config = ConfigFile.new()
 var keybindings_config = ConfigFile.new() #this is the keybindings config
 const SETTINGS_SAVE_PATH = "user://settings.ini" #this is where we save the file to. Linux is /home/"user"/.local/share/godot/app_userdata/"gamename"
 const DEFAULT_SETTINGS_PATH = "res://defaults/default_settings.ini"
@@ -13,16 +14,13 @@ func _ready() -> void:
 	#this is for the settings file, stores settings for screen, fps, volume, etc.
 	if !FileAccess.file_exists(SETTINGS_SAVE_PATH): #if the settings_config file doesnt exist, create a new one and set the following default values
 		#set_value(section, key, value) section(where this value is), key(name of the value), value(whatever we want to save)
-		settings_config.set_value("screen", "Width", DisplayServer.screen_get_size().x) #gets the current screen size and auto sets the ingame resolution to it
-		settings_config.set_value("screen", "Height", DisplayServer.screen_get_size().y)
-		settings_config.set_value("screen", "Window_Mode", 0)
-		settings_config.set_value("screen", "Max_FPS", 0)
-		settings_config.set_value("screen", "Vsync", false)
+		default_screen_settings()
 		settings_config.save(SETTINGS_SAVE_PATH)
 		settings_config.save(DEFAULT_SETTINGS_PATH)
 		
 	else: 
 		settings_config.load(SETTINGS_SAVE_PATH) #loads the settings_config file if it exists
+		default_config.load(DEFAULT_SETTINGS_PATH)
 	#this is for keybindings, stores the various keybindings
 	if !FileAccess.file_exists(KEYBINDING_SAVE_PATH):
 		#keyboard bindings
@@ -51,3 +49,11 @@ func load_screen_settings(): #loads screen settings
 		for key in settings_config.get_section_keys("screen"):
 			screen_settings[key] = settings_config.get_value("screen", key)
 	return screen_settings
+
+func default_screen_settings():
+	#set_value(section, key, value) section(where this value is), key(name of the value), value(whatever we want to save)
+	settings_config.set_value("screen", "Width", DisplayServer.screen_get_size().x) #gets the current screen size and auto sets the ingame resolution to it
+	settings_config.set_value("screen", "Height", DisplayServer.screen_get_size().y)
+	settings_config.set_value("screen", "Window_Mode", 0)
+	settings_config.set_value("screen", "Max_FPS", 0)
+	settings_config.set_value("screen", "Vsync", false)

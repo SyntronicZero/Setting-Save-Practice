@@ -9,6 +9,7 @@ script = ExtResource("1_n3wnn")
 [node name="LeftButton" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_neighbor_right = NodePath("../RightButton")
 text = "<"
 
 [node name="Selected" type="Label" parent="."]
@@ -34,6 +35,7 @@ grow_vertical = 2
 [node name="RightButton" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../LeftButton")
 text = ">"
 
 [connection signal="pressed" from="LeftButton" to="." method="_on_left_button_pressed"]

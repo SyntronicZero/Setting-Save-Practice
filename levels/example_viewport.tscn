@@ -37,6 +37,13 @@ mesh = SubResource("BoxMesh_7ablv")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.259773, 2.06235)
 
+[node name="FPS" type="Label" parent="."]
+modulate = Color(0, 1, 0, 1)
+offset_right = 108.0
+offset_bottom = 23.0
+text = "ultrawide test"
+script = ExtResource("2_1s84e")
+
 [node name="Settings" parent="." instance=ExtResource("1_3whew")]
 
 [node name="Label" type="Label" parent="Settings"]
@@ -52,10 +59,3 @@ offset_bottom = 0.119934
 grow_horizontal = 2
 grow_vertical = 2
 text = "ultrawide test"
-
-[node name="FPS" type="Label" parent="Settings"]
-modulate = Color(0, 1, 0, 1)
-offset_right = 108.0
-offset_bottom = 23.0
-text = "ultrawide test"
-script = ExtResource("2_1s84e")

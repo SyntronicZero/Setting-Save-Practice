@@ -23,6 +23,7 @@ buses/default_bus_layout="uid://buf4e0gc2ibi4"
 
 ConfigFileManager="*res://globals/ConfigFileManager.gd"
 ConfigsChanged="*res://globals/ConfigsChanged.gd"
+Settings="*res://globals/Settings.gd"
 
 [display]
 

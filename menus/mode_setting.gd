@@ -5,6 +5,7 @@ var mode_options: Array = [DisplayServer.WINDOW_MODE_WINDOWED, DisplayServer.WIN
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	add_to_group("Screen Settings")
 	h_select_2.update_label(label_names(screen_settings.Window_Mode))
 	h_select_2.max_options = mode_options.size() - 1
 	h_select_2.option_selected = screen_settings.Window_Mode
@@ -22,6 +23,11 @@ func label_names(array_index: int) -> String:
 	else:
 		return ""
 
+func reset_settings_menu():
+	screen_settings = ConfigFileManager.load_screen_settings()
+	h_select_2.update_label(label_names(screen_settings.Window_Mode))
+	h_select_2.option_selected = screen_settings.Window_Mode
+
 func update_borderless(array_index: int):
 	if array_index ==1:
 		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
@@ -31,8 +37,5 @@ func update_borderless(array_index: int):
 
 func _on_h_select_2_update_option_selected(value: int) -> void:
 	h_select_2.update_label(label_names(value))
-	#update_borderless(value)
-	#DisplayServer.window_set_mode(mode_options[value])
-	#ConfigFileManager.save_screen_settings("Window_Mode", value)
 	ConfigsChanged.changed_screen_settings.set("Window_Mode", value)
 	pass # Replace with function body.

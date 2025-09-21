@@ -11,12 +11,16 @@ var selected_framerate: int = 0 #current selected fps represented as the arrays 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	add_to_group("Screen Settings")
 	h_select.max_options = framerates.size() - 1
+	reset_settings_menu()
+	Engine.max_fps = screen_settings.Max_FPS
+
+func reset_settings_menu():
+	screen_settings = ConfigFileManager.load_screen_settings()
 	h_select.option_selected = framerates.find(screen_settings.Max_FPS)
 	_update_label(screen_settings.Max_FPS)
 	update_selected_framerate(screen_settings.Max_FPS)
-	Engine.max_fps = screen_settings.Max_FPS
-
 
 func _update_label(value: int): #updates the labels display
 	if value == 0:
