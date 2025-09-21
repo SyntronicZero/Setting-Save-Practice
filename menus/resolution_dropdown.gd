@@ -35,6 +35,8 @@ func save_screen_resolution(input_res: Vector2i): #converts Vector2 into the sav
 
 func _on_item_selected(index: int) -> void: #updates screen resolution based on what one was selected in the dropdown
 	var Res_ID = resolution_dropdown.get_item_text(index)
-	save_screen_resolution(resolutions[Res_ID])
-	get_window().set_size(resolutions[Res_ID])
+	#save_screen_resolution(resolutions[Res_ID])
+	#get_window().set_size(resolutions[Res_ID])
+	ConfigsChanged.changed_screen_settings.set("Width", resolutions[Res_ID].x)
+	ConfigsChanged.changed_screen_settings.set("Height", resolutions[Res_ID].y)
 	pass # Replace with function body.

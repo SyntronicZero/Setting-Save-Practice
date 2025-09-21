@@ -31,7 +31,8 @@ func update_borderless(array_index: int):
 
 func _on_h_select_2_update_option_selected(value: int) -> void:
 	h_select_2.update_label(label_names(value))
-	update_borderless(value)
-	DisplayServer.window_set_mode(mode_options[value])
-	ConfigFileManager.save_screen_settings("Window_Mode", value)
+	#update_borderless(value)
+	#DisplayServer.window_set_mode(mode_options[value])
+	#ConfigFileManager.save_screen_settings("Window_Mode", value)
+	ConfigsChanged.changed_screen_settings.set("Window_Mode", value)
 	pass # Replace with function body.

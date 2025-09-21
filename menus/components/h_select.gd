@@ -14,6 +14,7 @@ func _ready() -> void:
 func update_label(value): #updates the labels display
 	selected_label.text = str(value)
 	
+
 func update_selected(input_array: Array, value):
 	if input_array.has(value):
 		option_selected = input_array.find(value)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cf3w8243h2vy0"]
+[gd_scene load_steps=7 format=3 uid="uid://cf3w8243h2vy0"]
 
 [ext_resource type="PackedScene" uid="uid://cqnhk1l0pbdht" path="res://menus/settings.tscn" id="1_3whew"]
+[ext_resource type="Script" uid="uid://db8bnqtwr0m7c" path="res://levels/fps.gd" id="2_1s84e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2o6gp"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -51,3 +52,10 @@ offset_bottom = 0.119934
 grow_horizontal = 2
 grow_vertical = 2
 text = "ultrawide test"
+
+[node name="FPS" type="Label" parent="Settings"]
+modulate = Color(0, 1, 0, 1)
+offset_right = 108.0
+offset_bottom = 23.0
+text = "ultrawide test"
+script = ExtResource("2_1s84e")

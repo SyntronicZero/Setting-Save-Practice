@@ -5,9 +5,7 @@
 [ext_resource type="Script" uid="uid://dmop6wxwou5f6" path="res://menus/max_fps_setting.gd" id="3_0uirt"]
 [ext_resource type="Script" uid="uid://5wlxubnw2pt8" path="res://menus/mode_setting.gd" id="3_d8eyj"]
 [ext_resource type="PackedScene" uid="uid://bforowjk5phpy" path="res://menus/components/h_select.tscn" id="3_hjugb"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uirt"]
-bg_color = Color(0.103744, 0.103744, 0.103743, 1)
+[ext_resource type="Script" uid="uid://46wq0kr33hyf" path="res://menus/vsync_setting.gd" id="6_cyvjr"]
 
 [node name="Settings" type="CanvasLayer"]
 script = ExtResource("1_urrvo")
@@ -96,27 +94,21 @@ layout_mode = 2
 size_flags_horizontal = 10
 text = "Max FPS"
 
-[node name="HSelect" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting"]
+[node name="HSelect" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting" instance=ExtResource("3_hjugb")]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="LeftButton" type="Button" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting/HSelect"]
+[node name="VsyncSetting" type="HBoxContainer" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings"]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "<"
+script = ExtResource("6_cyvjr")
 
-[node name="SelectedFPS" type="Label" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting/HSelect"]
+[node name="VsyncLabel" type="Label" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/VsyncSetting"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 6.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_0uirt")
-text = "FPS HERE"
-horizontal_alignment = 1
+size_flags_horizontal = 10
+text = "V-Sync"
 
-[node name="RightButton" type="Button" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting/HSelect"]
+[node name="HSelect" parent="Background/TabContainer/Settings/OptionsList/ScreenSettings/VsyncSetting" instance=ExtResource("3_hjugb")]
 layout_mode = 2
-size_flags_horizontal = 3
-text = ">"
+max_options = 1
 
 [node name="VolumeSettings" type="VBoxContainer" parent="Background/TabContainer/Settings/OptionsList"]
 layout_mode = 2
@@ -183,6 +175,6 @@ metadata/_tab_index = 1
 
 [connection signal="item_selected" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/ResolutionSetting/ResolutionDropdown" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/ResolutionSetting/ResolutionDropdown" method="_on_item_selected"]
 [connection signal="update_option_selected" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/ModeSetting/HSelect2" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/ModeSetting" method="_on_h_select_2_update_option_selected"]
-[connection signal="pressed" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting/HSelect/LeftButton" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting" method="_on_left_button_pressed"]
-[connection signal="pressed" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting/HSelect/RightButton" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting" method="_on_right_button_pressed"]
+[connection signal="update_option_selected" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting/HSelect" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/MaxFPSSetting" method="_on_h_select_update_option_selected"]
+[connection signal="update_option_selected" from="Background/TabContainer/Settings/OptionsList/ScreenSettings/VsyncSetting/HSelect" to="Background/TabContainer/Settings/OptionsList/ScreenSettings/VsyncSetting" method="_on_h_select_update_option_selected"]
 [connection signal="pressed" from="Background/TabContainer/Settings/OptionsList/ApplySettings" to="." method="_on_apply_settings_pressed"]
